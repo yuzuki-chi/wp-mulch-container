@@ -7,7 +7,7 @@ services:
     restart: always
     container_name: wp-container_name
     ports:
-      - 8000:80
+      - 13001:80
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: username
