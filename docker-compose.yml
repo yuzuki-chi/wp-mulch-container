@@ -8,6 +8,7 @@ services:
     container_name: wp-container_name
     ports:
       - 13001:80
+    env_file: .wp-env
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: username
@@ -20,6 +21,7 @@ services:
     image: mariadb
     restart: always
     container_name: db-container_name
+    env_file: .db-env
     environment:
       MYSQL_DATABASE: dbname
       MYSQL_USER: username
