@@ -3,30 +3,23 @@ version: '3.1'
 services:
 
   wordpress:
-    image: wordpress
-    restart: always
+    image: wordpress:php7.2-apache
+    restart: unless-stopped
     container_name: wp-container_name
+    build: 
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 13001:80
     env_file: .wp-env
-    environment:
-      WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: username
-      WORDPRESS_DB_PASSWORD: password
-      WORDPRESS_DB_NAME: dbname
     volumes:
       - ./html:/var/www/html
 
   mariadb:
-    image: mariadb
-    restart: always
-    container_name: db-container_name
+    image: mariadb:10.5.3-focal
+    restart: unless-stopped
+    container_name: wordpress_mariadb
     env_file: .db-env
-    environment:
-      MYSQL_DATABASE: dbname
-      MYSQL_USER: username
-      MYSQL_PASSWORD: password
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - mariadb:/var/lib/mysql
 
