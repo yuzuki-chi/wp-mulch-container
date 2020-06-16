@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 13001:80
-    env_file: .wp-env
+    env_file: .env
     volumes:
       - ./html:/var/www/html
 
@@ -19,7 +19,7 @@ services:
     image: mariadb:10.5.3-focal
     restart: unless-stopped
     container_name: wordpress_mariadb
-    env_file: .db-env
+    env_file: .env
     volumes:
       - ./mysql:/var/lib/mysql
 
