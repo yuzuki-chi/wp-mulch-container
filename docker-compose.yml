@@ -21,7 +21,7 @@ services:
     container_name: wordpress_mariadb
     env_file: .db-env
     volumes:
-      - mariadb:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
 
 volumes:
   mariadb:
