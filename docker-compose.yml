@@ -2,20 +2,33 @@ version: '3.1'
 
 services:
 
-  wordpress:
+  wp-first:
     build: 
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - 13001:80
-    env_file: .env
+    env_file: .env-wp01
     volumes:
       - ./wp-site01/html:/var/www/html
 
   mariadb:
     image: mariadb:10.5.3-focal
     restart: unless-stopped
-    env_file: .env
+    env_file: .env-db
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    links:
+      - mariadb
+    ports:
+      - 13000:80
+    volumes:
+      - "./phpmyadmin/sessions:/sessions"
