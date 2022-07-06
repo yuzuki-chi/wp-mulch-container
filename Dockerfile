@@ -1,2 +1,2 @@
-FROM wordpress:php7.2-apache
+FROM wordpress:php8.1-apache
 COPY php.ini /usr/local/etc/php/php.ini
